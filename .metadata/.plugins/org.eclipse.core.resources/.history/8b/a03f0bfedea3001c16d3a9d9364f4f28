@@ -1,0 +1,5 @@
+package com.springboot.form.app.models.domain;
+
+public class Usuario {
+
+}

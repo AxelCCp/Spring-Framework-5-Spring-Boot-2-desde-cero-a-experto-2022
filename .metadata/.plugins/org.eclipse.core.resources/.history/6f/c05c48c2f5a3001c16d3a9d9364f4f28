@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${titulo}"></title>
+</head>
+<body>
+	<h3 th:text="${titulo}"></h3>
+	<form th:action="@{/form}" th:object="${usuario}" method="post" >
+		
+		<div>
+			<label for="username">Nombre</label>
+			<div>
+				<input type="text" id="nombre" th:field="*{nombre}">
+			</div>
+			<div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+		</div>
+		
+		<div>
+			<label for="nombre">Apellido</label>
+			<div>
+				<input type="text" id="nombre" th:field="*{nombre}">
+			</div>
+			<div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+		</div>
+		
+		<div>
+			<label for="apellido">Username</label>
+			<div>
+				<input type="text" id="apellido" th:field="*{apellido}">
+			</div>
+			<div th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></div>
+		</div>
+		
+		<div>
+			<label for="password">Password</label>
+			<div>
+				<input type="password" id="password" th:field="*{password}">
+			</div>
+			<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+		</div>
+		
+		<div>
+			<label for="email">Email</label>
+			<div>
+				<input type="text" id="email" th:field="*{email}">
+			</div>
+			<div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+		</div>
+		
+		<div>
+			<div>
+				<input type="submit" value="Enviar">
+			</div>
+		</div>
+	</form>
+</body>
+</html>

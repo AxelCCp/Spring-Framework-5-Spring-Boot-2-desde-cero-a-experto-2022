@@ -1,0 +1,9 @@
+package com.springboot.form.app.models.domain;
+
+public class Usuario {
+
+	private String username;
+	private String password;
+	private String email;
+	
+}
