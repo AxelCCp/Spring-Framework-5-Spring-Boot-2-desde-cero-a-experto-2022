@@ -6,7 +6,16 @@
 </head>
 <body>
 	<h3 th:text="${titulo}"></h3>
+	
 	<form th:action="@{/form}" th:object="${usuario}" method="post" >
+		
+		<div>
+			<label for="identificador">Identificador</label>
+			<div>
+				<input type="text" id="identificador" th:field="*{identificador}">
+			</div>
+			<div th:if="${#fields.hasErrors('identificador')}" th:errors="*{identificador}"></div>
+		</div>		
 		
 		<div>
 			<label for="nombre">Nombre</label>
@@ -46,6 +55,22 @@
 				<input type="text" id="email" th:field="*{email}">
 			</div>
 			<div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+		</div>
+		
+		<div>
+			<label for="cuenta">Cuenta</label>
+			<div>
+				<input type="number" id="cuenta" th:field="*{cuenta}">
+			</div>
+			<div th:if="${#fields.hasErrors('cuenta')}" th:errors="*{cuenta}"></div>
+		</div>
+		
+		<div>
+			<label for="fechaNacimiento">Fecha Nacimiento</label>
+			<div>
+				<input type="date" id="fechaNacimiento" th:field="*{fechaNacimiento}" placeholder="yyyy-MM-dd">
+			</div>
+			<div th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}"></div>
 		</div>
 		
 		<div>
