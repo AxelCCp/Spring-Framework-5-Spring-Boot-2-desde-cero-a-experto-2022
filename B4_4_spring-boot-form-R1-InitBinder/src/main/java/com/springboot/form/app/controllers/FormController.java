@@ -1,6 +1,7 @@
 package com.springboot.form.app.controllers;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
@@ -24,8 +25,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.springboot.form.app.editors.NombreMayusculaEditor;
+import com.springboot.form.app.editors.PaisPropertyEditor;
 import com.springboot.form.app.models.domain.Pais;
 import com.springboot.form.app.models.domain.Usuario;
+import com.springboot.form.app.services.PaisService;
 import com.springboot.form.app.validation.UsuarioValidador;
 
 
@@ -151,19 +154,29 @@ public class FormController {
 			
 			//binder.registerCustomEditor(String.class, new NombreMayusculaEditor());
 			binder.registerCustomEditor(String.class, "nombre", new NombreMayusculaEditor());
+			//CLASE77
+			binder.registerCustomEditor(Pais.class, "pais", paisEditor);
 		}
 		
-		//CLASE72
-		@ModelAttribute("paises")
-		public List<Pais>paises(){
+		//CLASE76
+		@ModelAttribute("listaPaises")
+		public List<Pais>listaPaises(){
+			return paisService.listar();
+		}
+		
+		/*
+		//CLASE75
+		@ModelAttribute("listaPaises")
+		public List<Pais>listaPaises(){
 			return Arrays.asList(
 					new Pais(1,"ES","EEUU"),
 					new Pais(2,"MX","MÉXICO"),
-					new Pais(3, "CA","CANADA"),
-					new Pais(4, "FR","FRANCIA"),
-					new Pais(5, "COL","COLOMBIA"));
-		}
+					new Pais(3,"CA","CANADA"),
+					new Pais(4,"FR","FRANCIA"),
+					new Pais(5,"COL","COLOMBIA"));
+		}*/
 		
+		/*
 		//CLASE74
 		@ModelAttribute("paisesMap")
 		public Map<String,String>paisesMap(){
@@ -174,17 +187,48 @@ public class FormController {
 			paises.put("FR", "FRANCIA");
 			paises.put("COL", "COLOMBIA");
 			return paises;
+		}*/
+		
+		/*
+		//CLASE72
+		@ModelAttribute("paises")
+		public List<String>paises(){
+			return Arrays.asList("EEUU",
+					"MÉXICO",
+					"CANADA",
+					"FRANCIA",
+					"COLOMBIA");
+		}*/
+		
+		//CLASE78
+		@ModelAttribute("listaRolesString")
+		public List<String>listaRolesString(){
+			List<String>roles = new ArrayList<>(); 
+			roles.add("ROLE_ADMIN");
+			roles.add("ROLE_USER");
+			roles.add("ROLE_MODERATOR");
+			return roles;
 		}
 		
-		//CLASE75
-		@ModelAttribute("listaPaises")
-		public List<String>listaPaises(){
-			return Arrays.asList("EEUU","MÉXICO","CANADA","FRANCIA","COLOMBIA");
+		//CLASE79
+		@ModelAttribute("listaRolesMap")
+		public Map<String,String>listadoRolesMap(){
+			Map<String,String>roles = new HashMap<String,String>(); 
+			roles.put("ROLE_ADMIN", "Administrador");
+			roles.put("ROLE_USER", "Usuario");
+			roles.put("ROLE_MODERATOR", "Moderador");
+			return roles;
 		}
-		
 		
 		//CLASE62
 		@Autowired
 		private UsuarioValidador validator;
+		//CLASE76
+		@Autowired
+		private PaisService paisService;
+		//CLASE77
+		@Autowired
+		private PaisPropertyEditor paisEditor;
+		
 	
 }

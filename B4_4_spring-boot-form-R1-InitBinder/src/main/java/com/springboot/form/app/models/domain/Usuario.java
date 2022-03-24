@@ -1,7 +1,9 @@
 package com.springboot.form.app.models.domain;
 
 import java.util.Date;
+import java.util.List;
 
+//import javax.validation.Valid;
 import javax.validation.constraints.Email;
 //import javax.validation.constraints.Future;
 import javax.validation.constraints.Max;
@@ -74,6 +76,13 @@ public class Usuario {
 	public void setPais(Pais pais) {
 		this.pais = pais;
 	}
+	public List<String> getRoles() {
+		return roles;
+	}
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
+	}
+
 
 	@NotBlank	
 	@Size(min=3,max=8)
@@ -99,6 +108,8 @@ public class Usuario {
 	@Past
 	//@Future
 	private Date fechaNacimiento;
-	
+	@NotNull
 	private Pais pais;
+	@NotEmpty
+	private List<String>roles;
 }

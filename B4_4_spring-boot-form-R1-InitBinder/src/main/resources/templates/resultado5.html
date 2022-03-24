@@ -15,8 +15,13 @@
 		<li th:text="${usuario.apellido}"></li>
 		<li th:text="${usuario.cuenta}"></li>
 		<li th:text="${#dates.format(usuario.fechaNacimiento,'dd-MM-YYYY')}"></li>
-		<li th:text="${usuario.pais}"></li>
-		
+		<li th:text="${usuario.pais.id}"></li>
+		<li th:text="${usuario.pais.codigo}"></li>
+		<li th:text="${usuario.pais.nombre}"></li>
+	</ul>
+	<div>Roles</div>
+	<ul>
+		<li th:each="role : ${usuario.roles}" th:text="${role}"></li>
 	</ul>
 </body>
 </html>
