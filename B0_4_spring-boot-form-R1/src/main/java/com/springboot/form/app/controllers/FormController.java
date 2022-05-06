@@ -29,6 +29,7 @@ public class FormController {
 		model.addAttribute("titulo","Formulario 1");
 		return "form1";
 	}
+	
 	@PostMapping("/form1")
 	public String procesar1(Model model, 
 			@RequestParam(name="username") String username,

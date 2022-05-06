@@ -12,4 +12,6 @@
 			<item value="org.eclipse.ui.Other"/>
 		</list>
 	</section>
+	<section name="EditorSelectionDialog">
+	</section>
 </section>

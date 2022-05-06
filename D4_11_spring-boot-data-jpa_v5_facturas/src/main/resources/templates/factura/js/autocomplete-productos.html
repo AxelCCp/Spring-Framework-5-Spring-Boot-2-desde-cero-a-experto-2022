@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<script type="text/javascript" th:fragment="javascript">
+
+
+	//CLASE166
+
+	//CON EL OBJ DOCUMENT SE INVOCA A LA FUNCIÓN READY() Y DENTRO DEL READY SE TIENE UNA FUNCIÓN. Y DENTRO DE ESTA FUNCTION SE IMPLEMENTA EL "AUTOCOMPLETE"
+	//EL AUTOCOMPLETE ESTÁ ASOCIADO CON EL ID BUSCAR_PRODUCTO DEL FORMULARIO DE LA FACTURA.
+	//A $("#buscar_producto") : SE LE INVOCA EL MÉTODO AUTOCOMPLETE.
+	//autocomplete(): RECIBE UN OBJ QUE CONTIENE 2 MÉTODOS IMPORTANTES: 
+		//SOURCE : SE ENCARGA DE HACER LA PETICIÓN AJAX.
+		//SELECT : SE ENCARGA DE PROCESAR EL RESULTADO Y HACE LO QUE SEA CON LOS DATOS. 
+		
+	//$.AJAX() : IMPLEMENTACIÓN DEL MÉTODO AJAX. DENTRO DE LOS () SE PASA UN OBJ CON TODOS LOS PARÁMENTROS  Y LA IMPLEMENTACIÓN DE MÉTODO SUCCESS PARA MANEJAR LA RESPUESTA.  
+		//url: "/factura/cargar-productos/" : MAPPING HACIA METODO HANDLER DE CONTROLADOR. ESTE HANDLER MANEJA LA PETICIÓN AJAX Y REALIZA LA CONSULTA A LA BBDD, PARA DEVOLVER LOS PRODUCTOS ENCONTRADOS.
+			//request.term : SE LE AGREGA UN PATH VARIABLE. ESTE PARÁMENTRO CONTIENE EL TEXTO QUE SE ESTA ESCRIBIENDO EN EL  CAMPO DE TEXTO.
+		//dataType: "json" : SE ESPECIFICA EL TIPO DE DATO.
+		//data{} : OPCIONALMENTE, SE PASA EL EL request.term COMO UN PARÁMETRO DEL REQUEST. COMO UN REQUESTPARAM.
+		//success: function(data){} : ESTA FUNCIÓN RECIBE LOS DATOS EN TIPO JSON Y SE LOS PASA AL AUTOCOMPLETE.  PARA PASARLOS AL AUTOCOMPLETE, SE USA EL RESPONSE.
+			//response($.map()) : DENTRO DEL RESPONSE SE INVOCA AL MÉTODO MAP. EL MAP REALIZA UN PROCESO POR CADA ELEMENTO DEL ARREGLO. POR CADA ELEMENTO QUE TENGA EL DATA. 
+				// SE LE PASA EL DATA EN LOS (). EL DATA CONTIENE  CADA ELEMENTO.
+				// SE LE PASA UNA FUNCIÓN ANONIMA QUE CONTIENE EL  VALOR DE CADA ELEMENTO.
+				//*** POR LO TANTO map() RETORNARÁ EL ID, NOMBRE, PRECIO. 
+	
+	//select: function(event,ui){} : PERMITE REALIZAR CUALQUIER TIPO DE TAREA UNA VEZ QUE SE SELECCIONA UN ELEMENTO DEL AUTOCOMPLETE.
+		//POR AHORA SE TOMA EL NOMBRE DEL PRODUCTO Y MOSTRARÁ EN EL CAMPO BUSCAR PRODUCTO.
+			//SE IMPLEMENTA MÉTO VAL() DE VALUE,  Y SE LE PASA A LOS () EL VALOR.
+		//DESPUES SE IMPLEMENTARÁ CREAR LA LÍNEA DE LA FACTURA.
+			
+	$(document).ready(function(){
+		
+		$("#buscar_producto").autocomplete({
+		
+				source: function(request,response){
+					$.ajax({
+						url: "/factura/cargar-productos/" + request.term,
+						dataType: "json", 
+						data: {term: request.term},
+						success: function(data){
+							response($.map(data, function(item){
+								return {
+									value: item.id,
+									label: item.nombre,
+									precio: item.precio,
+								};
+							}));
+						},
+					}); 
+				},
+				select: function(event,ui){
+					$("#buscar_producto").val(ui.item.label);
+					return false;
+				}
+			});
+		}
+	);
+
+
+
+
+</script>
+		
+	
+</body>
+</html>
