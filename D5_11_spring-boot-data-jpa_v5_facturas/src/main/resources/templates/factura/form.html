@@ -43,11 +43,12 @@
 					<div class="form-group row">
 						<label for="buscar_producto" class="col-sm-2 col-form-label" th:text="'Buscar producto'"></label>
 						<div class="col-sm-6">
-							<input type="text" name="buscar_producto" id="buscar_producto" class="form-control" />
+							<input type="text" name="buscar_producto" id="buscar_producto" class="form-control" /> <!-- SE CAMBIA TH:FIELD POR NAME E ID, YA QUE SOLO ES UN CUADRO DE BÚSQUEDA. -->
 						</div>
 					</div>
 					
-
+					
+					<!-- ESTE ES UN MOLDE DE UNA TABLA CON LOS ITEMS Y SU <TR> SE VA A PEGAR EN LA TABLA DE MÁS ABAJO cargarItemProductos -->
 					<table th:replace="factura/plantilla-items :: itemsFactura"></table>
 					
 					
@@ -65,6 +66,7 @@
 								<th>PRECIO</th>
 								<th>CANTIDAD</th>
 								<th>TOTAL</th>
+								<th>ELIMINAR</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -73,8 +75,8 @@
 					
 					</table>
 					
+					<h5>TOTAL: <span class="text-secondary" id="gran_total">0</span></h5>
 					
-
 					<div class="form-group row">
 						<div class="col-sm-6">
 							<input type="submit" th:value="${titulo}"

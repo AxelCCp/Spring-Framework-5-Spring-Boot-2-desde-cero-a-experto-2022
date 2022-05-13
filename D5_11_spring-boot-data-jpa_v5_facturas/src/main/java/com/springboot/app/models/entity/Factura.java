@@ -103,8 +103,10 @@ public class Factura implements Serializable{
 	@ManyToOne(fetch=FetchType.LAZY)
 	private Cliente cliente;
 	
+	
+	
 	@OneToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-	@JoinColumn(name="factura_id") //PARA QUE LA TABLA ITEMFACTURA, TENGA LA LLAVA FORANEA FACTURA_ID. ESTO PARA RELACIONAR LA TABLA FACTURA CON SUS ITEMS. 
+	@JoinColumn(name="factura_id")  		//LA RELACION ES EN UN SOLO SENTIDO. ES DE FACTURA ----> ITEMFACTURA. POR LO TANTO AQUÍ HAY QUE DETALLAR CUAL ES LA LLAVE FORÁNEA QUE RELACIONARÁ FACTURA CON ITEMFACTURA. 
 	private List<ItemFactura>items;
 	
 	
