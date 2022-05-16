@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<script type="text/javascript" th:fragment="javascript">
+
+
+	//CLASE166
+
+	//CON EL OBJ DOCUMENT SE INVOCA A LA FUNCI�N READY() Y DENTRO DEL READY SE TIENE UNA FUNCI�N. Y DENTRO DE ESTA FUNCTION SE IMPLEMENTA EL "AUTOCOMPLETE"
+	//EL AUTOCOMPLETE EST� ASOCIADO CON EL ID BUSCAR_PRODUCTO DEL FORMULARIO DE LA FACTURA.
+	//A $("#buscar_producto") : SE LE INVOCA EL M�TODO AUTOCOMPLETE.
+	//autocomplete(): RECIBE UN OBJ QUE CONTIENE 2 M�TODOS IMPORTANTES: 
+		//SOURCE : SE ENCARGA DE HACER LA PETICI�N AJAX.
+		//SELECT : SE ENCARGA DE PROCESAR EL RESULTADO Y HACE LO QUE SEA CON LOS DATOS. 
+		
+	//$.AJAX() : IMPLEMENTACI�N DEL M�TODO AJAX. DENTRO DE LOS () SE PASA UN OBJ CON TODOS LOS PAR�MENTROS  Y LA IMPLEMENTACI�N DE M�TODO SUCCESS PARA MANEJAR LA RESPUESTA.  
+		//url: "/factura/cargar-productos/" : MAPPING HACIA METODO HANDLER DE CONTROLADOR. ESTE HANDLER MANEJA LA PETICI�N AJAX Y REALIZA LA CONSULTA A LA BBDD, PARA DEVOLVER LOS PRODUCTOS ENCONTRADOS.
+			//request.term : SE LE AGREGA UN PATH VARIABLE. ESTE PAR�MENTRO CONTIENE EL TEXTO QUE SE ESTA ESCRIBIENDO EN EL  CAMPO DE TEXTO.
+		//dataType: "json" : SE ESPECIFICA EL TIPO DE DATO.
+		//data{} : OPCIONALMENTE, SE PASA EL EL request.term COMO UN PAR�METRO DEL REQUEST. COMO UN REQUESTPARAM.
+		//success: function(data){} : ESTA FUNCI�N RECIBE LOS DATOS EN TIPO JSON Y SE LOS PASA AL AUTOCOMPLETE.  PARA PASARLOS AL AUTOCOMPLETE, SE USA EL RESPONSE.
+			//response($.map()) : DENTRO DEL RESPONSE SE INVOCA AL M�TODO MAP. EL MAP REALIZA UN PROCESO POR CADA ELEMENTO DEL ARREGLO. POR CADA ELEMENTO QUE TENGA EL DATA. 
+				// SE LE PASA EL DATA EN LOS (). EL DATA CONTIENE  CADA ELEMENTO.
+				// SE LE PASA UNA FUNCI�N ANONIMA QUE CONTIENE EL  VALOR DE CADA ELEMENTO.
+				//*** POR LO TANTO map() RETORNAR� EL ID, NOMBRE, PRECIO. 
+	
+	//select: function(event,ui){} : PERMITE REALIZAR CUALQUIER TIPO DE TAREA UNA VEZ QUE SE SELECCIONA UN ELEMENTO DEL AUTOCOMPLETE.
+		//POR AHORA SE TOMA EL NOMBRE DEL PRODUCTO Y MOSTRAR� EN EL CAMPO BUSCAR PRODUCTO.
+			//SE IMPLEMENTA M�TO VAL() DE VALUE,  Y SE LE PASA A LOS () EL VALOR.
+		//DESPUES SE IMPLEMENTAR� CREAR LA L�NEA DE LA FACTURA.
+		
+	//CLASE169
+	//SE CREA LA LINEA A PARTIR DE LA PLANTILLA. HAY QUE IR A BUSCAR EL <TR> DE PLANTILLAITEMS.HTML.
+	//var linea = $("#plantillaItemsFactura") : A TRAVES DEL ID DEL TBODY DE PLANTILLA-ITEMS.HTML, SE OBTIENE EL CONTENIDO.
+	//html() : M�TODO QUE SIRVE PARA OBTENER EL CONTENIDO HTML DE ELEMENTO #plantillaItemsFactura.
+	//linea =  ... : SE REEMPLAZAN LOS PAR�MENTROS ID, NOMBRE, PRECIO POR EL VALOR.
+	//$("#cargarItemProductos tbody").append(linea) : SE AGREGAN LAS L�NEAS AL tbody DE LA TABLA #cargarItemProductos DE FORM.html DE LA FACTURA.
+	
+	//CLASE170
+	//FUNCI�N PARA CALCULAR EL IMPORTE.
+		//$("#total_importe_" + id) : SE CALCULA EL TOTAL PARA CADA LÍNEA DE PRODUCTO.  ".html()" : PERMITE AGREGAR EL CONTENIDO EN EL HTML, REEMPLAZANDO EL VALOR "0" DE <td><span id="total_importe_{ID}">0</span></td>. 
+		
+		//itemHelper.calcularImporte(ui.item.value, ui.item.precio, 1);  : AL LLAMAR A LA FUNCIÓN, EL "1" ES EL VALOR POR DEFECTO.
+	
+	//CLASE171
+	//MÉDODO DEL OBJ itemHelper PARA NO DUPLICAR 2 LINEAS DE UN MISMO PRODUCTO. SI SE VUELVEN A AGREGAR 2 PRODUCTOS DE UN MISMO TIPO A LA FACTURA, SE SUMAN A LA RESPECTIVA LÍNEA DE ITEM.
+	//ESTA FUNCIÓN BUSCA LÍNEA POR LÍNEA SI ES QUE YA EXISTE EL ID DEL PRODUCTO. COMPARA EL "item_id[]" DE LA ETIQUETA <INPUT> DE LA PLANTILLA-ITEMS.HTML CON EL ID QUE SE PASA POR ARGUMENTO EN "hasProducto: function(id)"".
+	//CON UN BUCLE FOR EACH Y UNA FUNCIÓN ANÓNIMA, SE PREGUNTA SI EL ID QUE SE PASA POR PARÁMENTRO ES IGUAL AL VALOR.
+
+	//incrementaCantidad : MÉTODO QUE INCREMENTA LA CANTIDAD DE LA LÍNEA YA EXISTENTE.
+
+	//CLASE172
+	//MÉTODO PARA ELIMINAR LÍNEAS DE LA FACTURA.
+	//<tr id="row_{ID}"> SE HACE REFERENCIA AL TR DE LA FILA EN LA PLANTILLA-ITEMS.HTML
+
+	//CLASE173
+	//SE CALCULA EL GRANTOTAL DEL LA FACTURA.
+	
+
+
+	$(document).ready(function(){
+		
+		$("#buscar_producto").autocomplete({
+		
+				source: function(request,response){
+					$.ajax({
+						url: "/factura/cargar-productos/" + request.term,
+						dataType: "json", 
+						data: {term: request.term},
+						success: function(data){
+							response($.map(data, function(item){
+								return {
+									value: item.id,
+									label: item.nombre,
+									precio: item.precio,
+								};
+							}));
+						},
+					}); 
+				},
+
+				focus: function(event, ui){
+    				event.preventDefault();
+    				$('input[name="buscar_producto"]').val(ui.item.label);
+				},
+
+
+
+				select: function(event,ui){
+					
+					//$("#buscar_producto").val(ui.item.label);
+					
+
+					//CLASE171_SE PREGUNTA SI LA LÍNEA DE PRODUCTO YA EXISTE EN LA FACTURA. SI ES ASÍ. SE LE PASA EL ID Y EL PRECIO.
+					if(itemHelper.hasProducto(ui.item.value)){
+						itemHelper.incrementaCantidad(ui.item.value, ui.item.precio)
+						return false;
+					}
+
+
+					//CLASE169
+					var linea = $("#plantillaItemsFactura").html();
+					
+					linea = linea.replace(/{ID}/g, ui.item.value);
+					linea = linea.replace(/{NOMBRE}/g, ui.item.label);
+					linea = linea.replace(/{PRECIO}/g, ui.item.precio);
+					
+					$("#cargarItemProductos tbody").append(linea);
+					
+					//SE LLAMA A LA FUNCIÓN Q CALCULA EL TOTAL.
+					itemHelper.calcularImporte(ui.item.value, ui.item.precio, 1);
+
+					return false;
+				}
+			});
+			//CLASE176 : ANTES DE EJECUTAR EL SUBMIT PARA GUARDAR LA FACTURA, HAY QUE ELIMINAR EL TBODY DE LA PLANTILLA plantilla-items.html  : <tbody id="plantillaItemsFactura"> . YA QUE SI NO SE ELIMINA, VA A COGER LOS DATOS DE LA PLANTILLA ERRONEAMENTE. EL ID TIENE UN VALOR NUMÉRICO Y LANZARÍA UN ERROR.
+			//A TRAVÉS DE UNA FUNCIÓN ANÓNIMA SE APLICA EL EVENTO SUBMIT Y DENTRO DE LA FUNCIÓN SE ELIMINA LA PLANTILLA.
+				$("form").submit(function(){
+					$("#plantillaItemsFactura").remove();
+					return;
+				});
+		}
+	);
+
+	//CLASE170
+	var itemHelper = {
+		calcularImporte: function(id,precio,cantidad){
+			$("#total_importe_" + id).html(parseInt(precio) * parseInt(cantidad));
+			
+			//CLASE173_PARA IR ACTUALIZANDO EL GRANTOTAL CADA VEZ QUE SE HAGAN CAMBIOS EN LAS FILAS DE LOS ITEMS.
+			this.calcularGranTotal();
+
+		}, 
+		
+		//CLASE171
+		hasProducto: function(id){
+			var resultado = false;
+			$('input[name="item_id[]"]').each(function(){
+
+				//SI EL ID ES IGUAL AL VALOR DEL INPUT ACTUAL.
+				if(parseInt(id) == parseInt($(this).val())){
+					resultado = true;
+				} 
+			});
+			return resultado;
+		},
+		
+		incrementaCantidad: function(id, precio){
+
+			//SE OBTIENE LA CANTIDAD A TRAVÉS DEL  id="cantidad_{ID}" EN EL <INPUT> DE plantilla-items.html Y CON "?" SE PREGUNTA SI TIENE VALOR NUMÉRICO. //Y SI TIENE CANTIDAD EL VALOR SE PASA A INTEGER.  ": 0" DE LO CONTRARIO SE RETORNA 0.//SE AGREGA LA NUEVA CANTIDAD Y SE LE PASA AL <INPUT>  id="cantidad_{ID}".  SE ACTUALIZA LA CANTIDAD DEL IMPORTE PRECIO X CANTIDAD.
+			var cantidad = $("#cantidad_" + id).val() ? parseInt( $("#cantidad_" + id).val()) : 0;
+			$("#cantidad_" + id).val(++cantidad);
+			this.calcularImporte(id,precio,cantidad);
+		},
+		
+		//CLASE172
+		eliminarLineaFactura: function(id){
+			$("#row_" + id).remove();
+
+				//CLASE173_PARA IR ACTUALIZANDO EL GRANTOTAL CADA VEZ QUE SE HAGAN CAMBIOS EN LAS FILAS DE LOS ITEMS.
+				this.calcularGranTotal();
+
+		},
+		
+		//CLASE173
+		calcularGranTotal: function(){
+			var total = 0;
+			//CON JQUERY SE RECORRE CON UN EACH, CADA SPAN DE plantilla-items.html QUE CONTENGA COMO ID "TOTAL IMPORTE".   " id^ " :  SE USA UNA EXPRESIÓN REGULAR PARA QUE BUSQUE EN TODAS LAS ETIQUETAS SPAN CON EL ID id="total_importe_{ID}
+			$('span[id^="total_importe_"]').each(function(){
+				total += parseInt($(this).html());
+			});
+			
+			//SE LE ASIGNA EL VALOR TOTAL A AL LA <SPAN id="gran_total"> DE FORM.HTML DE FACTURA. 
+			$('#gran_total').html(total);
+		}
+	}
+
+</script>	
+		
+	
+</body>
+</html>
