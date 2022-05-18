@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+				<h4 class="card-title">
+					<a class="btn btn-light btn-xs"
+						th:href="@{'/ver/' + ${factura.cliente.id}}"
+						th:text="'&laquo; volver'"></a>
+				</h4>
+
+				<form th:action="@{/factura/form/}" th:object="${factura}" method="post">
+
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label" th:text="'Cliente'"></label>
+						<div class="col-sm-6">
+							<input
+								th:value="${factura.cliente.nombre} + ' ' + ${factura.cliente.apellido}"
+								class="form-control" disabled='disabled' />
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label" th:text="'Descripción'"></label>
+						<div class="col-sm-6">
+							<input type="text" th:field= "*{descripcion}" class="form-control" th:errorclass="'form-control is-invalid'" />
+							<div class="invalid-feedback" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></div>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label" th:text="'Observación'"></label>
+						<div class="col-sm-6">
+							<textarea th:field="*{observacion}" class="form-control"></textarea>
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<label for="buscar_producto" class="col-sm-2 col-form-label" th:text="'Buscar producto'"></label>
+						<div class="col-sm-6">
+							<input type="text" name="buscar_producto" id="buscar_producto" class="form-control" /> <!-- SE CAMBIA TH:FIELD POR NAME E ID, YA QUE SOLO ES UN CUADRO DE BÚSQUEDA. -->
+						</div>
+					</div>
+					
+					
+					<!-- ESTE ES UN MOLDE DE UNA TABLA CON LOS ITEMS Y SU <TR> SE VA A PEGAR EN LA TABLA DE MÁS ABAJO cargarItemProductos -->
+					<table th:replace="factura/plantilla-items :: itemsFactura"></table>
+					
+					
+					<!-- TABLA PRINCIPAL DEL LA FACTURA CONTIENE CADA FILA QUE SE GENERA DE FORMA DINAMICA CON JQUERY AL SELECCIONAR UN PRODUCTO DEL AUTOCOMPLETE.
+					EL <TR> DE PLANTILLA-ITEMS.HTML, SE VA A INSERTAR EN LA TABLA 
+					table-sm : TABLA SMALL. 
+					table-striped : INTERCALA LOS COLORES DE CADA FILA.
+					table-hover : CAMBIA DE COLOR CUANDO UNO ESTÁ POR SOBRE UNA FINAL.
+					EN TBODY : SE CREARÁN LAS LÍNEAS DE LA FACTURA. LA CONFIGURACION ESTA EN EL JQUERY.
+					-->
+					<table id="cargarItemProductos" class="table table-sm table-striped table-hover">
+						<thead>
+							<tr>
+								<th>NOMBRE</th>
+								<th>PRECIO</th>
+								<th>CANTIDAD</th>
+								<th>TOTAL</th>
+								<th>ELIMINAR</th>
+							</tr>
+						</thead>
+						<tbody>
+						
+						</tbody>
+					
+					</table>
+					
+					<h5>TOTAL: <span class="text-secondary" id="gran_total">0</span></h5>
+					
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<input type="submit" th:value="${titulo}"
+								class="btn btn-secondary" />
+						</div>
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+	<script th:replace="factura/js/autocomplete-productos :: javascript"></script>
+</body>
+</html>
