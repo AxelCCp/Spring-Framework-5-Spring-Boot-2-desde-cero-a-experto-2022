@@ -1,23 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
-    <fullyQualifiedTypeName name="org.springframework.web.servlet.config.annotation.ViewControllerRegistry"/>
-    <fullyQualifiedTypeName name="org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler"/>
-    <fullyQualifiedTypeName name="org.springframework.web.servlet.support.SessionFlashMapManager"/>
-    <fullyQualifiedTypeName name="org.springframework.web.servlet.FlashMap"/>
-    <fullyQualifiedTypeName name="com.springboot.app.auth.handler.LoginSuccessHandler"/>
-    <fullyQualifiedTypeName name="org.springframework.security.core.context.SecurityContextHolder"/>
-    <fullyQualifiedTypeName name="org.springframework.security.core.context.SecurityContext"/>
-    <fullyQualifiedTypeName name="org.springframework.security.core.Authentication"/>
-    <fullyQualifiedTypeName name="java.util.Collection"/>
-    <fullyQualifiedTypeName name="org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestWrapper"/>
-    <fullyQualifiedTypeName name="org.springframework.security.access.annotation.Secured"/>
-    <fullyQualifiedTypeName name="org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity"/>
-    <fullyQualifiedTypeName name="org.springframework.context.annotation.Bean"/>
-    <fullyQualifiedTypeName name="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
-    <fullyQualifiedTypeName name="org.springframework.boot.CommandLineRunner"/>
-    <fullyQualifiedTypeName name="javax.sql.DataSource"/>
-    <fullyQualifiedTypeName name="java.io.Serializable"/>
     <fullyQualifiedTypeName name="javax.persistence.Entity"/>
     <fullyQualifiedTypeName name="javax.persistence.Table"/>
     <fullyQualifiedTypeName name="javax.persistence.Id"/>
@@ -33,7 +15,6 @@
     <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
     <fullyQualifiedTypeName name="com.springboot.app.models.dao.IUsuarioDao"/>
     <fullyQualifiedTypeName name="com.springboot.app.models.entity.Usuario"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="org.springframework.security.core.GrantedAuthority"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="com.springboot.app.models.entity.Role"/>
@@ -48,11 +29,8 @@
     <fullyQualifiedTypeName name="org.springframework.stereotype.Controller"/>
     <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
-    <fullyQualifiedTypeName name="org.springframework.stereotype.Component"/>
     <fullyQualifiedTypeName name="org.springframework.web.servlet.view.document.AbstractPdfView"/>
-    <fullyQualifiedTypeName name="com.springboot.app.models.entity.Factura"/>
     <fullyQualifiedTypeName name="com.lowagie.text.pdf.PdfPTable"/>
-    <fullyQualifiedTypeName name="com.springboot.app.models.entity.ItemFactura"/>
     <fullyQualifiedTypeName name="com.lowagie.text.Phrase"/>
     <fullyQualifiedTypeName name="com.lowagie.text.pdf.PdfPCell"/>
     <fullyQualifiedTypeName name="java.awt.Color"/>
@@ -60,4 +38,26 @@
     <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="org.springframework.web.servlet.LocaleResolver"/>
     <fullyQualifiedTypeName name="java.util.Locale"/>
+    <fullyQualifiedTypeName name="org.springframework.web.servlet.view.document.AbstractXlsxView"/>
+    <fullyQualifiedTypeName name="com.springboot.app.models.entity.Factura"/>
+    <fullyQualifiedTypeName name="org.apache.poi.ss.usermodel.Sheet"/>
+    <fullyQualifiedTypeName name="org.apache.poi.ss.usermodel.Row"/>
+    <fullyQualifiedTypeName name="org.apache.poi.ss.usermodel.Cell"/>
+    <fullyQualifiedTypeName name="com.springboot.app.models.entity.ItemFactura"/>
+    <fullyQualifiedTypeName name="org.apache.poi.ss.usermodel.CellStyle"/>
+    <fullyQualifiedTypeName name="org.apache.poi.ss.usermodel.BorderStyle"/>
+    <fullyQualifiedTypeName name="org.apache.poi.ss.usermodel.IndexedColors"/>
+    <fullyQualifiedTypeName name="org.apache.poi.ss.usermodel.FillPatternType"/>
+    <fullyQualifiedTypeName name="org.springframework.stereotype.Component"/>
+    <fullyQualifiedTypeName name="org.springframework.web.servlet.view.AbstractView"/>
+    <fullyQualifiedTypeName name="org.springframework.data.domain.Page"/>
+    <fullyQualifiedTypeName name="org.supercsv.io.CsvBeanWriter"/>
+    <fullyQualifiedTypeName name="org.supercsv.io.ICsvBeanWriter"/>
+    <fullyQualifiedTypeName name="org.supercsv.prefs.CsvPreference"/>
+    <fullyQualifiedTypeName name="org.springframework.oxm.jaxb.Jaxb2Marshaller"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="com.springboot.app.models.entity.Cliente"/>
+    <fullyQualifiedTypeName name="javax.xml.bind.annotation.XmlRootElement"/>
+    <fullyQualifiedTypeName name="javax.xml.bind.annotation.XmlElement"/>
+    <fullyQualifiedTypeName name="com.springboot.app.view.xml.ClienteList"/>
 </qualifiedTypeNameHistroy>
