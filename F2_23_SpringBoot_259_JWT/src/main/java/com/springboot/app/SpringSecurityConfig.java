@@ -46,31 +46,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		// SE ASIGNAN LAS RUTAS DE ACCESO PÚBLICO.
 		http.authorizeRequests().antMatchers("/", "/css/**", "/js/**", "/images/**", "/listar", "/locale", "/listar-rest").permitAll()
 		
-				//CLASE205---------------------------------
-				// RUTAS PRIVADAS
-				//.antMatchers("/ver/**").hasAnyRole("USER")
-				//.antMatchers("/uploads/**").hasAnyRole("USER")
-				//.antMatchers("/form/**").hasAnyRole("ADMIN")
-				//.antMatchers("/eliminar/**").hasAnyRole("ADMIN")
-				//.antMatchers("/factura/**").hasAnyRole("ADMIN")
-				//-----------------------------------------
+			
 		
 				.anyRequest().authenticated()
 				
 				
-				/*.and()
-				//IMPLEMENTA FORMULARIO DE Login Y TAMBN EL LOG OUT PARA SALIR DE LA SESIÓN.  // SE PONE loginPage("/login") PARA IMPLEMENTAR NUESTRA PROPIA PAGINA DE INICIO, YA QUE SPRING YANOS DA UNA POR DEFECTO.
-				.formLogin()
-				
-				//(CLASE201: PONIENDO MENSAJE DE ÉXITO DE INICIO DE SESIÓN)
-				.successHandler(successHandler)
-				
-				.loginPage("/login").permitAll()
-				.and()
-				.logout().permitAll()
-				//CLASE199 :  SE AGREGA LA PÁGINA DE ERROR - ESTÁ RELACIONADO CON CLASE MVCCONFIG Y ERROR_403.HTML
-				.and()
-				.exceptionHandling().accessDeniedPage("/error_403")*/
 				
 				
 				
@@ -90,19 +70,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	
-	//CLASE207 -------------------------------------------------------------------
-	//SE CORTÓ ESTE CÓDIGO Y SE PEGO EN clase MvcConfig.java. A LA VEZ SE INYECTÓ AQUÍ CON AUTOWIRED.
-	//3
-	//@Bean
-	//public static BCryptPasswordEncoder passwordEncoder() {
-	//	  return new BCryptPasswordEncoder();
-	//}
-	//----------------------------------------------------------------------------
-	
-	
 
-	
-	
 	@Autowired // 1
 	public void configurerGlobal(AuthenticationManagerBuilder builder) throws Exception {
 		

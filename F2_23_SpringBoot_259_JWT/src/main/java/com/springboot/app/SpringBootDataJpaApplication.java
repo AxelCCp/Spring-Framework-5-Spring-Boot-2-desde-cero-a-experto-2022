@@ -13,12 +13,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
 @SpringBootApplication
-public class SpringBootDataJpaApplication implements CommandLineRunner{
+public class SpringBootDataJpaApplication /*implements CommandLineRunner*/{
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootDataJpaApplication.class, args);
 	}
 
+	/*
 	@Override
 	public void run(String... args) throws Exception {
 		//1
@@ -29,8 +30,10 @@ public class SpringBootDataJpaApplication implements CommandLineRunner{
 		}
 		
 	}
+	
 
 	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
+	*/
 }

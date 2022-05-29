@@ -24,26 +24,6 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 public class MvcConfig implements WebMvcConfigurer {
 	
 	
-	
-	//-----------------------------------------------------------------------------------------------------
-	/*
-	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		// TODO Auto-generated method stub
-		WebMvcConfigurer.super.addResourceHandlers(registry);
-		
-		String resourcePath = Paths.get("uploads").toAbsolutePath().toUri().toString();
-		
-		log.info(resourcePath);
-		
-		registry.addResourceHandler("/uploads/**")
-		.addResourceLocations(resourcePath);
-	}*/
-	//-----------------------------------------------------------------------------------------------------
-	
-	
-	
-	
 	//CLASE199 --------------------------------------------------------------------------------------------
 	//SE PERSONALIZA LA PAGINA DE ERROR CUANDO UN USUARIO NO TIENE PERMISO PARA ENTRAR EN CIERTA PÁGINA DE LA APP.
 	//ESTE ES UN CONTROLADOR PARAMETRIZABLE. UN VIEW CONTROLLER QUE ES PARA CARGAR UNA VISTA.
@@ -55,8 +35,6 @@ public class MvcConfig implements WebMvcConfigurer {
 		registry.addViewController("/error_403").setViewName("/error_403");
 	}
 	//-----------------------------------------------------------------------------------------------------
-	
-	
 	
 	
 	//CLASE207---------------------------------------------------------------------------------------------
@@ -109,7 +87,4 @@ public class MvcConfig implements WebMvcConfigurer {
 		marshaller.setClassesToBeBound(new Class[] {com.springboot.app.view.xml.ClienteList.class});
 		return marshaller;
 	}
-	
-	
-	private final Logger log = LoggerFactory.getLogger(getClass());
 }
