@@ -1,0 +1,11 @@
+INSERT INTO clientes (nombre, apellido, email, create_at) VALUES ('ASJHAS','AKSJHD','HasASG@KDJFH.COM','2018-01-01');
+INSERT INTO clientes (nombre, apellido, email, create_at) VALUES ('ZIZU','SDS','A@KDJFH.COM','2019-01-01');
+INSERT INTO clientes (nombre, apellido, email, create_at) VALUES ('OWR','ZXC','ADS@KDJFH.COM','2015-01-01');
+INSERT INTO clientes (nombre, apellido, email, create_at) VALUES ('ZXCX','WQE','DF@KDJFH.COM','2016-01-01');
+INSERT INTO clientes (nombre, apellido, email, create_at) VALUES ('MKO','RTY','XC@KDJFH.COM','2012-01-01');
+INSERT INTO clientes (nombre, apellido, email, create_at) VALUES ('NMBFFS','QQW','WER@KDJFH.COM','2018-01-01');
+INSERT INTO clientes (nombre, apellido, email, create_at) VALUES ('QUTW','ZXC','XCV@KDJFH.COM','2018-01-01');
+INSERT INTO clientes (nombre, apellido, email, create_at) VALUES ('WMNWM','ERT','XCVj@KDJFH.COM','2021-01-01');
+INSERT INTO clientes (nombre, apellido, email, create_at) VALUES ('ZOCXIU','ZXC','XCAV@KDJFH.COM','2022-01-01');
+INSERT INTO clientes (nombre, apellido, email, create_at) VALUES ('AHSKJ','TYU','HASDASG@KDJFH.COM','2010-01-01');
+INSERT INTO clientes (nombre, apellido, email, create_at) VALUES ('MAASD','QW','QEEEW@KDJFH.COM','2011-01-01');
